@@ -1,0 +1,1 @@
+var json_Pemerintahan_19 = {"type":"FeatureCollection","name":"Pemerintahan_19","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":"1","Nama":"Kantor Kepala Desa Kemawi"},"geometry":{"type":"Point","coordinates":[109.354493200481755,-7.534519164838692]}}]}

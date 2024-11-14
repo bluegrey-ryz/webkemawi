@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="./resources/ol.css">
+        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
+        <link rel="stylesheet" type="text/css" href="resources/horsey.min.css">
+        <link rel="stylesheet" type="text/css" href="resources/ol3-search-layer.min.css">
+        <link href="resources/ol-geocoder.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
+        <link rel="stylesheet" href="./resources/qgis2web.css">
+        <style>
+            html, body {
+                background-color: #f4f4f9;
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .header {
+                background-color: #999798;
+                color: white;
+                text-align: center;
+                padding: 60px 15px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .header h1 {
+                margin: 0;
+                font-size: 36px;
+            }
+            .navbar {
+                background-color: #999798;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        position: fixed; /* Membuat navbar tetap di atas */
+        top: 0; /* Menyelaraskan navbar ke atas */
+        width: 100%; /* Memastikan lebar navbar mengikuti lebar layar */
+        z-index: 1000; 
+            }
+
+            .navbar a {
+                color: white;
+                padding: 14px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: block;
+                font-size: 18px;
+            }
+
+            .navbar a:hover {
+                background-color: #999798;
+            }
+
+            .description {
+                padding: 20px;
+                font-size: 16px;
+                line-height: 1.6;
+                background-color: #fff;
+                margin: 20px auto;
+                max-width: 800px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: justify;
+            }
+            .description2{
+                padding: 20px;
+                font-size: 16px;
+                line-height: 1.6;
+                background-color: #fff;
+                margin: 20px auto;
+                max-width: 800px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: justify;
+            }
+
+            .description h2 {
+                color: #333;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            #map {
+                width: 100%;
+                height: 500px;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                margin-top: 20px;
+            }
+            .description-image {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 20px; /* Untuk menempatkan gambar di tengah dan memberikan jarak ke bawah */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+            .map-container {
+                width: 80%;
+                margin: 30px auto;
+                padding: 15px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .about {
+                padding: 20px;
+                font-size: 16px;
+                line-height: 1.6;
+                background-color: #fff;
+                margin: 20px auto;
+                max-width: 800px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: justify;
+            }
+
+            .footer {
+                text-align: center;
+                padding: 10px;
+                font-size: 14px;
+                background-color: #999798;
+                color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .ol-control > * {
+                background-color: #f8f8f8!important;
+                color: #444444!important;
+                border-radius: 0px;
+            }
+
+            .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
+                color: #444444!important;
+            }
+
+            .search-layer-input-search {
+                background-color: #f8f8f8!important;
+            }
+
+            .ol-control > :focus, .ol-control >:hover {
+                background-color: rgba(248, 248, 248, 0.7)!important;
+            } 
+
+            .ol-control {
+                background-color: rgba(255,255,255,.4) !important;
+                padding: 2px !important;
+            }
+        </style>
+
+<title> Peta Desa Kemawi, Banyumas</title>
+</head>
+<body>
+    <!-- Bagian Header -->
+    <div class="header">
+        <h1>Selamat Datang Di Desa Kemawi </h1>
+      
+    </div>
+
+    <!-- Bagian Navbar -->
+    <div class="navbar">
+        <a href="#deskripsi">Deskripsi</a>
+        <a href="#deskripsi2">Potensi</a>
+        <a href="#peta">Peta</a>
+        <a href="#tentang">Tentang</a>
+    </div>
+
+    <!-- Bagian Deskripsi Kelurahan -->
+    <div class="description" id="deskripsi">
+        <h2>Deskripsi Desa Kemawi</h2>
+        <img class="description-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh1S7NtHOgFTPkADHaxgwcXhUzB51pdV_Jd74werJHhia4-iyphAf6OT1JCzfaSsXI2hq-axqbSWdesv9qkIPP3TrJskhRChEbnCHEn_6P1q7JpBvbcVArpR0907wlYA4PeeJ7KQBrPeD0/s1600/url.jpg" alt="Gambar Kantor Kelurahan">
+        <p>Desa Kemawi adalah sebuah desa di Kecamatan Somagede, Kabupaten Banyumas, Provinsi Jawa Tengah, yang menawarkan pesona alam yang asri serta masyarakat yang kental dengan nilai-nilai kebersamaan. Desa ini berada di kawasan perbukitan dengan luas wilayah sekitar 5,21 km², yang sebagian besar digunakan untuk lahan pertanian dan perkebunan. Topografi perbukitan yang melingkupi desa ini tidak hanya memberikan pemandangan yang memikat, tetapi juga menjadikannya tempat yang kaya akan sumber daya air alami, seperti mata air dan sungai kecil yang mengalir ke area persawahan</p>
+    </div>
+    <div class="description2" id="deskripsi2">
+        <h2>Potensi Wisata Desa Kemawi</h2>
+        <p>Kemawi juga dikenal dengan destinasi wisata alam yang cukup terkenal di Banyumas, seperti Curug Gemawang, sebuah air terjun bertingkat yang memiliki kolam air berwarna biru di dasar curugnya. Dengan ketinggian sekitar 70 meter, curug ini menjadi destinasi favorit wisatawan lokal yang ingin merasakan kesejukan dan ketenangan di tengah alam. Selain itu, Bukit Pring Amba juga menjadi salah satu spot menarik untuk camping, hiking, dan menikmati panorama matahari terbit atau terbenam. Dari puncak bukit ini, pengunjung dapat menyaksikan pemandangan Gunung Slamet di kejauhan, yang menjadi daya tarik tersendiri</p>
+    </div>
+        <h2>Peta Desa Kemawi
+    <!-- Bagian Peta Interaktif dalam Box -->
+    <div class="map-container" id="peta">
+        <div id="map">
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+        </div>
+    </div>
+
+       <!-- Bagian Tentang Peta -->
+       <div class="about" id="tentang">
+        <h2>Tentang Peta</h2>
+        <p>Peta Desa Kemawi, yang terletak di Kecamatan Somagede, Kabupaten Banyumas, memiliki sejumlah manfaat yang sangat besar untuk pengembangan desa serta kehidupan sosial dan ekonomi warganya. Peta desa ini memuat berbagai informasi penting mengenai geografi, infrastruktur, dan potensi alam yang dimiliki desa. Dengan peta yang akurat dan terperinci, berbagai pihak dapat memanfaatkan informasi ini untuk perencanaan pembangunan yang lebih baik, pengelolaan sumber daya alam yang efisien, serta meningkatkan keterlibatan masyarakat dalam proses pengambilan keputusan.
+
+            Salah satu manfaat utama peta desa adalah dalam pemetaan infrastruktur, seperti jalan, jembatan, serta fasilitas umum lainnya seperti balai desa, sekolah, dan tempat ibadah. Peta ini membantu pemerintah desa dan daerah dalam merencanakan pembangunan dan perbaikan infrastruktur yang tepat sasaran, sehingga meningkatkan kenyamanan dan aksesibilitas bagi warga. Selain itu, peta juga menjadi alat yang berguna dalam pengelolaan sumber daya alam, seperti lahan pertanian, mata air, dan ruang terbuka hijau yang ada di desa.</p>
+       </div>
+    <!-- Footer Dibuat oleh -->
+    <div class="footer">
+        <p> © 2024 || Peta Desa Kemawi || Dibuat oleh: Indri Wahyuningsih</p>
+    </div>
+    </div>
+
+        <script src="resources/qgis2web_expressions.js"></script>
+<script src="resources/proj4.js"></script>
+        <script>proj4.defs('EPSG:4326','+proj=longlat +datum=WGS84 +no_defs');</script>
+        <script src="./resources/functions.js"></script>
+        <script src="./resources/ol.js"></script>
+        <script src="resources/horsey.min.js"></script>
+        <script src="resources/ol3-search-layer.js"></script>
+        <script src="./resources/ol-layerswitcher.js"></script>
+        <script src="resources/ol-geocoder.js"></script>
+        <script src="layers/BatasRT_1.js"></script><script src="layers/kali_2.js"></script><script src="layers/Desa_Kemawii_poly_3.js"></script><script src="layers/hutan_4.js"></script><script src="layers/administrasidesa_ar_25k_5.js"></script><script src="layers/jalan_6.js"></script><script src="layers/pemakaman_7.js"></script><script src="layers/Masjid_8.js"></script><script src="layers/Gunung_9.js"></script><script src="layers/Shop_10.js"></script><script src="layers/TempatIbadah_11.js"></script><script src="layers/Food_12.js"></script><script src="layers/Lapangan_13.js"></script><script src="layers/Kesehatan_14.js"></script><script src="layers/Rumah_15.js"></script><script src="layers/Wisata_16.js"></script><script src="layers/Bengkel_17.js"></script><script src="layers/Sekolah_18.js"></script><script src="layers/Pemerintahan_19.js"></script>
+        <script src="styles/BatasRT_1_style.js"></script><script src="styles/kali_2_style.js"></script><script src="styles/Desa_Kemawii_poly_3_style.js"></script><script src="styles/hutan_4_style.js"></script><script src="styles/administrasidesa_ar_25k_5_style.js"></script><script src="styles/jalan_6_style.js"></script><script src="styles/pemakaman_7_style.js"></script><script src="styles/Masjid_8_style.js"></script><script src="styles/Gunung_9_style.js"></script><script src="styles/Shop_10_style.js"></script><script src="styles/TempatIbadah_11_style.js"></script><script src="styles/Food_12_style.js"></script><script src="styles/Lapangan_13_style.js"></script><script src="styles/Kesehatan_14_style.js"></script><script src="styles/Rumah_15_style.js"></script><script src="styles/Wisata_16_style.js"></script><script src="styles/Bengkel_17_style.js"></script><script src="styles/Sekolah_18_style.js"></script><script src="styles/Pemerintahan_19_style.js"></script>
+        <script src="./layers/layers.js" type="text/javascript"></script> 
+        <script src="./resources/Autolinker.min.js"></script>
+        <script src="./resources/qgis2web.js"></script>
+    </body>
+</html>

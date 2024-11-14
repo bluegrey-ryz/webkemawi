@@ -1,0 +1,1 @@
+var json_TempatIbadah_11 = {"type":"FeatureCollection","name":"TempatIbadah_11","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"nama":"Vihara Buddha Gaya"},"geometry":{"type":"Point","coordinates":[109.355578291194874,-7.552603013367305]}}]}
